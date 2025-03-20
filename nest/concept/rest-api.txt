@@ -1,0 +1,9 @@
+
+
+
+Rest API
+
+- Client server architecture
+- Stateless ( each request should be treated independetly and server doest maintain client session)
+- Cacheable
+- Uniform Interafce ( http://localhost:3000/user) --> (CREATE,DELETE,PUT,POST)

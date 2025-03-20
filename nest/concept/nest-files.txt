@@ -1,0 +1,28 @@
+1)app.services
+- It is just a class that encapsulates the business logic.
+- Providers can be injected into the controller, promoting loose coupling and testability.
+
+2)app.module
+1. Self-contained unit that encapsulates related controllers, services, and providers.
+2. Module can export providers and other components that can be used by other modules.
+
+3)app.controller
+- Handles routes.
+
+4)Dependency Injection
+- NestJS uses dependency injection to provide modules with necessary dependencies, promoting loose coupling and testability.
+
+
+5)pipe
+- It is a function that transforms or validates the data before it reaches a controller method (validate, transform, sanitization).
+
+6)dtos (Data Transfer Object)
+- It is a simple class that is used to represent data that is being transferred between different layers.
+
+7)dependency injection
+- It is a software design pattern that involves passing dependencies (objects or services) into another object rather than the object creating them itself. This makes code modular, testable, reusable, and maintainable.
+
+Types of dependency
+- Intra-modular
+- Inter-modular
+- Circular dependency

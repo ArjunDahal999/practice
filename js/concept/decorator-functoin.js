@@ -11,25 +11,27 @@
  * @returns {function}
  */
 
-function decoratorFunction(fn) {
-  console.log("This is function name =  " + fn.name);
-  return (...args) => {
-    console.log("This is argument = " + args);
-    fn(...args);
+// Timer decorator function
+function timerDecorator(func) {
+  return function (...args) {
+    const start = performance.now(); // Start the timer
+    const result = func(...args); // Call the original function
+    const end = performance.now(); // End the timer
+    console.log(
+      `Function ${func.name} took ${(end - start).toFixed(2)}ms to execute.`
+    );
+    return result;
   };
 }
 
-/**
- *
- * @param {String} str
- */
-function display(str) {
-  console.log("display = " + str);
-  const up = str.toUpperCase();
-  console.log("up = " + up);
-  return up;
+// A simple function to calculate factorial
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
 }
 
-const test = decoratorFunction(display);
+// Apply the timer decorator to the factorial function
+const timedFactorial = timerDecorator(factorial);
 
-test("arjun");
+// Call the decorated function
+console.log(timedFactorial(100)); // Outputs the factorial result along with the time taken

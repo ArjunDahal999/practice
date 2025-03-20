@@ -40,3 +40,5 @@ console.log(userMap.get({ id: 1 }));
 const objKey = { id: 1 };
 userMap.set(objKey, "objectsdasdaasda");
 console.log(userMap.get(objKey)); // "object"
+userMap.set("name", "John");
+console.log(userMap);
