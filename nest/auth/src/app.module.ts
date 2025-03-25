@@ -1,29 +1,26 @@
 import { Module } from '@nestjs/common';
-
-import { UsersModule } from './users/users.module';
-import { TweetModule } from './tweet/tweet.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProfileModule } from './profile/profile.module';
-import { HashtagModule } from './hashtag/hashtag.module';
+import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
-import dbConfig from './config/db.config';
-import dbProdConfig from './config/db.prod.config';
-import testConfig from './config/test.config';
+import devDbConfig from './config/dev.db.config';
+import prodDbConfig from './config/prod.db.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
+
 @Module({
   imports: [
-    UsersModule,
-    TweetModule,
-    ProfileModule,
-    HashtagModule,
+    UserModule,
     ConfigModule.forRoot({
       isGlobal: true,
       expandVariables: true,
-      load: [dbConfig, dbProdConfig, testConfig], // if we are trying to acces like test.prod.config.dev.port , we need to load these
+      load: [devDbConfig],
     }),
+    AuthModule,
+    // for type orm config
     TypeOrmModule.forRootAsync({
       useFactory:
-        process.env.NODE_ENV === 'production' ? dbProdConfig : dbConfig,
+        process.env.NODE_ENV === 'production' ? prodDbConfig : devDbConfig,
     }),
+
     // TypeOrmModule.forRootAsync({ // for async connection
     //   useFactory:()=>({
     //   type:'postgres',
@@ -47,5 +44,7 @@ import testConfig from './config/test.config';
     //   database:"postgres"
     // })
   ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

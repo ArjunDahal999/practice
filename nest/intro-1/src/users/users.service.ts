@@ -12,9 +12,11 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-    private configService: ConfigService, // injectinh the servie to access the config
+    private configService: ConfigService, // injecting the servie to access the config
   ) {}
   async getAllUsers(paginationDto: PaginationDto) {
+    // const enviroment = this.configService.get('DB_PASSWORD');
+    // console.log(enviroment);
     const [items, total] = await this.userRepository.findAndCount({
       relations: {
         profile: true,
