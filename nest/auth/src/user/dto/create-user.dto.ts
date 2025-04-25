@@ -18,3 +18,14 @@ export class CreateUserDto {
   @IsOptional()
   avatar: string;
 }
+
+
+// create dummy user data
+
+export const dummyUser: CreateUserDto = {
+    "firstName": 'John',
+    "lastName": 'Doe',
+    "email": 'john.doe@example.com',
+    "password": 'password123',
+    "avatar": 'https://example.com/avatar.jpg'
+};

@@ -14,23 +14,24 @@ import {
 } from '@nestjs/common';
 import { UserService } from './users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { PaginationDto } from './dtos/pagination-dto';
+import { ConfigService } from '@nestjs/config';
+import { PaginationQueryDto } from 'src/common/pagination/dto/pagination-query.dto';
 
 // http://localhost:3000/user
 
 @Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly configService: ConfigService,
+  ) {}
 
   // @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   // @Query('limit', new DefaultValuePipe(5), ParseIntPipe) limit: number,
   @Get()
-  getAllUsers(
-    @Query()
-    paginationDto: PaginationDto,
-  ) {
-    console.log(typeof paginationDto);
-    return this.userService.getAllUsers(paginationDto);
+  getAllUsers(@Query() userQueryDto: PaginationQueryDto) {
+    console.log(process.env.NAME);
+    return this.userService.getAllUsers(userQueryDto);
   }
 
   @Get(':id')

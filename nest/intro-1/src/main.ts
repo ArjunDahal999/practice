@@ -9,6 +9,9 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
+      transformOptions: {
+        enableImplicitConversion: true, // // @Type(() => Number) no need since we have enable the implicit type conversion
+      },
     }),
   );
   await app.listen(process.env.PORT ?? 3000);

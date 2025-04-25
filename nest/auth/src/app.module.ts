@@ -5,7 +5,9 @@ import devDbConfig from './config/dev.db.config';
 import prodDbConfig from './config/prod.db.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { EmailModule } from './email/email.module';
 
+console.log('assdfasd' + process.env.NODE_ENV);
 @Module({
   imports: [
     UserModule,
@@ -20,6 +22,7 @@ import { AuthModule } from './auth/auth.module';
       useFactory:
         process.env.NODE_ENV === 'production' ? prodDbConfig : devDbConfig,
     }),
+    EmailModule,
 
     // TypeOrmModule.forRootAsync({ // for async connection
     //   useFactory:()=>({

@@ -12,13 +12,10 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   }
   // this will be automaticall invloked , it will extract from the request body
   async validate(email: string, password: string) {
-    console.log(email);
-    console.log(password);
-    console.log('fasdfasdfa');
-    const user = await this.authService.login({ email, password });
+    const user = await this.authService.validateUser({ email, password });
     if (!user) {
       throw new Error('Invalid credentials');
     }
-    return user;
+    return user; // this will place the user properties in the default user object present in the request ie : { ...other req properties , user: {...user }  }
   }
 }

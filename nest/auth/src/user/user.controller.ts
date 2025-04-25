@@ -7,10 +7,14 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  UseGuards,
+  Request,
+  Req,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -25,6 +29,12 @@ export class UserController {
   @Get()
   findAll() {
     return this.userService.findAll();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  findOne(@Req() req) {
+    return this.userService.findOneById(req.user.id); // since i have extracted id  from sub and returned as {id:payload.sub}, which will be attached to the user object automatically
   }
 
   @Patch(':id')

@@ -27,6 +27,14 @@ export class UserService {
       },
     });
   }
+  async findOneById(id: number) {
+    console.log('this is payload id ' + id);
+    return await this.userRepository.findOne({
+      where: {
+        id,
+      },
+    });
+  }
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
