@@ -1,3 +1,4 @@
+import { IntersectionType } from '@nestjs/mapped-types';
 import {
   IsArray,
   IsInt,

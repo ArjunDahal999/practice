@@ -31,10 +31,6 @@ export class UserService {
   async getAllUsers(
     userQueryDto: PaginationQueryDto,
   ): Promise<IPaginated<User>> {
-    console.log(this.userConfiguration.secret);
-    // const enviroment = this.configService.get('DB_PASSWORD');
-    // console.log(enviroment);
-    console.log(userQueryDto);
     try {
       const user = await this.paginationProvider.paginateQuery(
         userQueryDto,

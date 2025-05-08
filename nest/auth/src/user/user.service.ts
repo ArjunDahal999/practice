@@ -27,6 +27,15 @@ export class UserService {
       },
     });
   }
+
+  async findOneByEmail(email: string) {
+    return await this.userRepository.findOne({
+      where: {
+        email,
+      },
+    });
+  }
+
   async findOneById(id: number) {
     console.log('this is payload id ' + id);
     return await this.userRepository.findOne({
